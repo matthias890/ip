@@ -1,11 +1,27 @@
+import java.util.Scanner;
+
 public class Delta {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         printLine();
         System.out.println(" Hello! I'm Delta");
         System.out.println(" What can I do for you?");
         printLine();
-        System.out.println(" Bye. Hope to see you again soon!");
-        printLine();
+
+        while (true) {
+            String command = scanner.nextLine();
+            printLine();
+
+            if (command.equals("bye")) {
+                System.out.println(" Bye. Hope to see you again soon!");
+                printLine();
+                break;
+            }
+
+            System.out.println(" " + command);
+            printLine();
+        }
     }
 
     public static void printLine() {
