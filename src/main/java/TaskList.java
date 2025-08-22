@@ -9,6 +9,21 @@ public class TaskList {
 
     public void addTask(Task task) {
         this.list.add(task);
+        System.out.println(" Got it. I've added this task:");
+        System.out.println("   "+ task.toString());
+        System.out.println(String.format(" Now you have %d tasks in the list.", this.list.size()));
+    }
+
+    public void markTask(int index) {
+        this.list.get(index).updateStatus(true);
+        System.out.println(" Nice! I've marked this task as done:");
+        System.out.println("   " + this.list.get(index).toString());
+    }
+
+    public void unmarkTask(int index) {
+        this.list.get(index).updateStatus(false);
+        System.out.println(" OK, I've marked this task as not done yet:");
+        System.out.println("   " + this.list.get(index).toString());
     }
 
     public Task getTask(int index) {

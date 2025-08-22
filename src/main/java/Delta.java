@@ -17,33 +17,40 @@ public class Delta {
 
             String command = splitInput[0];
 
-            if (splitInput.length > 1) {
+            if (command.equals("bye")) {
+                System.out.println(" Bye. Hope to see you again soon!");
+                printLine();
+                break;
+            } else if (command.equals("list")) {
+                taskList.printTasks();
+            } else if (command.equals("mark") || command.equals("unmark")) {
+                int index = Integer.parseInt(splitInput[1]) - 1;
                 if (command.equals("mark")) {
-                    taskList.updateTaskStatus(Integer.parseInt(splitInput[1]), true);
-                    System.out.println(" Nice! I've marked this task as done:");
-                    System.out.println("   " + taskList.getTask(Integer.parseInt(splitInput[1]) - 1).toString());
-                } else if (command.equals("unmark")) {
-                    taskList.updateTaskStatus(Integer.parseInt(splitInput[1]), false);
-                    System.out.println(" OK, I've marked this task as not done yet:");
-                    System.out.println("   " + taskList.getTask(Integer.parseInt(splitInput[1]) - 1).toString());
+                    taskList.markTask(index);
                 } else {
-                    taskList.addTask(new Task(input));
-                    System.out.println(" added: " + input);
+                    taskList.unmarkTask(index);
                 }
-
             } else {
-                if (command.equals("bye")) {
-                    System.out.println(" Bye. Hope to see you again soon!");
-                    printLine();
-                    break;
-                } else if (command.equals("list")) {
-                    taskList.printTasks();
+                // Add Tasks
+                if (command.equals("todo")) {
+                    String description = input.split(" ", 2)[1];
+                    taskList.addTask(new ToDo(description));
+                } else if (command.equals("deadline")) {
+                    String[] firstSplit = input.split("/by");
+                    String description = firstSplit[0].trim().split(" ", 2)[1];
+                    String by = firstSplit[1].trim();
+                    taskList.addTask(new Deadline(description, by));
+                } else if (command.equals("event")) {
+                    String[] firstSplit = input.split("/from");
+                    String[] secondSplit = firstSplit[1].trim().split("/to");
+                    String description = firstSplit[0].trim().split(" ", 2)[1];
+                    String from = secondSplit[0].trim();
+                    String to = secondSplit[1].trim();
+                    taskList.addTask(new Event(description, from, to));
                 } else {
-                    taskList.addTask(new Task(input));
-                    System.out.println(" added: " + input);
+                    System.out.println("Sorry, I do not recognise this command. Please enter another command.");
                 }
             }
-
             printLine();
         }
     }
