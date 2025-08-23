@@ -49,24 +49,24 @@ public class Delta {
         }
 
         String[] splitInput = trimmedInput.split(" ", 2);
-        String command = splitInput[0];
+        Command command = Command.getCommand(splitInput[0]);
 
         switch (command) {
-            case "bye": {
+            case BYE: {
                 break;
             }
 
-            case "list": {
+            case LIST: {
                 taskList.printTasks();
                 break;
             }
 
-            case "mark":
-            case "unmark":
-            case "delete": {
+            case MARK:
+            case UNMARK:
+            case DELETE: {
                 // No task number error
                 if (splitInput.length < 2) {
-                    if (command.equals("mark") || command.equals("unmark")) {
+                    if (command == Command.MARK || command == Command.UNMARK) {
                         throw new DeltaException("Usage: mark/unmark <number>");
                     } else {
                         throw new DeltaException("Usage: delete <number>");
@@ -84,9 +84,9 @@ public class Delta {
                     throw new DeltaException("The task number is out of range.");
                 }
 
-                if (command.equals("mark")) {
+                if (command == Command.MARK) {
                     taskList.markTask(index);
-                } else if (command.equals("unmark")) {
+                } else if (command == Command.UNMARK) {
                     taskList.unmarkTask(index);
                 } else {
                     taskList.deleteTask(index);
@@ -94,7 +94,7 @@ public class Delta {
                 break;
             }
 
-            case "todo": {
+            case TODO: {
                 if (splitInput.length < 2 || splitInput[1].trim().isEmpty()) {
                     throw new DeltaException("Usage: todo <description>");
                 }
@@ -102,7 +102,7 @@ public class Delta {
                 break;
             }
 
-            case "deadline": {
+            case DEADLINE: {
                 // no /by included
                 if (!trimmedInput.contains("/by")) {
                     throw new DeltaException("Usage: deadline <description> /by <date>");
@@ -124,7 +124,7 @@ public class Delta {
                 break;
             }
 
-            case "event": {
+            case EVENT: {
                 if (!trimmedInput.contains("/from") || !trimmedInput.contains("/to")) {
                     throw new DeltaException("Usage: event <description> /from <start> /to <end>");
                 }
@@ -152,18 +152,6 @@ public class Delta {
                 taskList.addTask(new Event(description, from, to));
                 break;
             }
-
-            default:
-                throw new DeltaException(
-                        "Please enter a valid command. Example Usages:\n" +
-                                " todo <description>\n" +
-                                " deadline <description> /by <date>\n" +
-                                " event <description> /from <start> /to <end>\n" +
-                                " list\n" +
-                                " mark/unmark <number>\n" +
-                                " delete <number>\n" +
-                                " bye");
-
         }
     }
 }
