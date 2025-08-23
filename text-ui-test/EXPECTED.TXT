@@ -1,12 +1,79 @@
 __________________________________________________
- Hello! I'm Delta
- What can I do for you?
+Hello! I'm Delta
+What can I do for you?
 __________________________________________________
 __________________________________________________
- Got it. I've added this task:
-   [T][ ] read book
+Please enter a valid command. Example Usages:
+ todo <description>
+ deadline <description> /by <date>
+ event <description> /from <start> /to <end>
+ list
+ mark/unmark <number>
+ bye
+__________________________________________________
+__________________________________________________
+Your input cannot be empty.
+__________________________________________________
+__________________________________________________
+Got it. I've added this task:
+ [T][ ] read book
  Now you have 1 tasks in the list.
 __________________________________________________
 __________________________________________________
- Bye. Hope to see you again soon!
+Usage: deadline <description> /by <date>
+__________________________________________________
+__________________________________________________
+Please enter a valid command. Example Usages:
+ todo <description>
+ deadline <description> /by <date>
+ event <description> /from <start> /to <end>
+ list
+ mark/unmark <number>
+ bye
+__________________________________________________
+__________________________________________________
+Usage: deadline <description> /by <date>
+__________________________________________________
+__________________________________________________
+Got it. I've added this task:
+ [D][ ] return book (by: Mon)
+ Now you have 2 tasks in the list.
+__________________________________________________
+__________________________________________________
+Here are the tasks in your list:
+ 1. [T][ ] read book
+ 2. [D][ ] return book (by: Mon)
+__________________________________________________
+__________________________________________________
+Nice! I've marked this task as done:
+ [T][X] read book
+__________________________________________________
+__________________________________________________
+The task number is out of range.
+__________________________________________________
+__________________________________________________
+Here are the tasks in your list:
+ 1. [T][X] read book
+ 2. [D][ ] return book (by: Mon)
+__________________________________________________
+__________________________________________________
+OK, I've marked this task as not done yet:
+ [T][ ] read book
+__________________________________________________
+__________________________________________________
+Here are the tasks in your list:
+ 1. [T][ ] read book
+ 2. [D][ ] return book (by: Mon)
+__________________________________________________
+__________________________________________________
+Please enter a valid command. Example Usages:
+ todo <description>
+ deadline <description> /by <date>
+ event <description> /from <start> /to <end>
+ list
+ mark/unmark <number>
+ bye
+__________________________________________________
+__________________________________________________
+Bye. Hope to see you again soon!
 __________________________________________________

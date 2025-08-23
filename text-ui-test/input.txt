@@ -1,2 +1,15 @@
+hi
+
 todo read book
+deadline return book
+dadline return book /by Mon
+deadline return book /by
+deadline return book /by Mon
+list
+mark 1
+mark 0
+list
+unmark 1
+list
+exit
 bye
