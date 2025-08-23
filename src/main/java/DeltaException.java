@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
-
-public class DeltaException {
+public class DeltaException extends Exception {
+    public DeltaException(String message) {
+        super(message);
+    }
 }
