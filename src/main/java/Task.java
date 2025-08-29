@@ -43,13 +43,20 @@ abstract class Task {
             if (parts.length < 4) {
                 throw new DeltaException("Bad deadline record: " + fileTask);
             }
-            return new Deadline(taskDescription, isTaskDone, parts[3]);
+            return new Deadline(
+                    taskDescription,
+                    isTaskDone,
+                    DateTimeParser.parseDateTime(parts[3]));
 
         case "E":
             if (parts.length < 5) {
                 throw new DeltaException("Bad event record: " + fileTask);
             }
-            return new Event(taskDescription, isTaskDone, parts[3], parts[4]);
+            return new Event(
+                    taskDescription,
+                    isTaskDone,
+                    DateTimeParser.parseDateTime(parts[3]),
+                    DateTimeParser.parseDateTime(parts[4]));
 
         default:
             throw new DeltaException("Unknown task type: " + taskType);

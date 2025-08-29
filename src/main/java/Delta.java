@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
+import java.time.LocalDateTime;
 
 public class Delta {
     public static void main(String[] args) {
@@ -102,7 +103,7 @@ public class Delta {
                 try {
                     storage.save(taskList);
                 } catch (IOException e) {
-                    System.out.println("Unable to save to hard disk: " + e.getMessage());
+                    throw new DeltaException("Unable to save to hard disk: " + e.getMessage());
                 }
                 break;
             }
@@ -116,7 +117,7 @@ public class Delta {
                 try {
                     storage.save(taskList);
                 } catch (IOException e) {
-                    System.out.println("Unable to save to hard disk: " + e.getMessage());
+                    throw new DeltaException("Unable to save to hard disk: " + e.getMessage());
                 }
                 break;
             }
@@ -139,12 +140,18 @@ public class Delta {
                 if (by.isEmpty()) {
                     throw new DeltaException("Usage: deadline <description> /by <date>");
                 }
-                taskList.addTask(new Deadline(description, by));
+
+                try {
+                    LocalDateTime byDateTime = DateTimeParser.parseDateTime(by);
+                    taskList.addTask(new Deadline(description, byDateTime));
+                } catch (IllegalArgumentException e) {
+                    throw new DeltaException(e.getMessage());
+                }
 
                 try {
                     storage.save(taskList);
                 } catch (IOException e) {
-                    System.out.println("Unable to save to hard disk: " + e.getMessage());
+                    throw new DeltaException("Unable to save to hard disk: " + e.getMessage());
                 }
                 break;
             }
@@ -174,12 +181,27 @@ public class Delta {
                 if (to.isEmpty()) {
                     throw new DeltaException("Usage: event <description> /from <start> /to <end>");
                 }
-                taskList.addTask(new Event(description, from, to));
+
+                LocalDateTime fromDateTime;
+                LocalDateTime toDateTime;
+
+                try {
+                    fromDateTime = DateTimeParser.parseDateTime(from);
+                } catch (IllegalArgumentException e) {
+                    throw new DeltaException(e.getMessage());
+                }
+
+                try {
+                    toDateTime = DateTimeParser.parseDateTime(to);
+                } catch (IllegalArgumentException e) {
+                    throw new DeltaException(e.getMessage());
+                }
+                taskList.addTask(new Event(description, fromDateTime, toDateTime));
 
                 try {
                     storage.save(taskList);
                 } catch (IOException e) {
-                    System.out.println("Unable to save to hard disk: " + e.getMessage());
+                    throw new DeltaException("Unable to save to hard disk: " + e.getMessage());
                 }
                 break;
             }
