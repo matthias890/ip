@@ -40,13 +40,19 @@ abstract class Task {
             return new ToDo(taskDescription, isTaskDone);
 
         case "D":
+            if (parts.length < 4) {
+                throw new DeltaException("Bad deadline record: " + fileTask);
+            }
             return new Deadline(taskDescription, isTaskDone, parts[3]);
 
         case "E":
+            if (parts.length < 5) {
+                throw new DeltaException("Bad event record: " + fileTask);
+            }
             return new Event(taskDescription, isTaskDone, parts[3], parts[4]);
 
         default:
-            throw new DeltaException("Unknown task type");
+            throw new DeltaException("Unknown task type: " + taskType);
         }
     }
 

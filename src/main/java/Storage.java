@@ -44,8 +44,8 @@ public class Storage {
             try {
                 Task task = Task.convertFromStorageFormat(line);
                 list.add(task);
-            } catch (DeltaException e) {
-                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Skipping bad line: " + e.getMessage());
             }
         }
         return new TaskList(list);
