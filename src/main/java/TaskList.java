@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -5,6 +6,10 @@ public class TaskList {
 
     public TaskList() {
         this.list = new ArrayList<>(100);
+    }
+
+    public TaskList(ArrayList<Task> list) {
+        this.list = list;
     }
 
     public void addTask(Task task) {
@@ -36,6 +41,10 @@ public class TaskList {
 
     public int getNumberOfTasks() {
         return this.list.size();
+    }
+
+    public ArrayList<Task> getList() {
+        return this.list;
     }
 
     public void printTasks() {

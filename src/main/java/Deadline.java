@@ -3,7 +3,17 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;;
+        this.by = by;
+    }
+
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
+    @Override
+    public String convertToStorageFormat() {
+        return String.format("D | %s | %s", super.convertToStorageFormat(), this.by);
     }
 
     @Override

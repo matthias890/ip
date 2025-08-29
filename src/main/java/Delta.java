@@ -1,9 +1,17 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Delta {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        TaskList taskList = new TaskList();
+        Storage storage = new Storage("./data/delta.txt");
+        TaskList taskList;
+        try {
+            taskList = storage.load();
+        } catch (IOException e) {
+            System.out.println("Unable to load from hard disk: " + e.getMessage());
+            taskList = new TaskList();
+        }
 
         printLine();
         System.out.println("Hello! I'm Delta");
@@ -24,7 +32,7 @@ public class Delta {
             }
 
             try {
-                handleInput(input, taskList);
+                handleInput(input, taskList, storage);
             } catch (DeltaException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
@@ -41,7 +49,7 @@ public class Delta {
         System.out.println();
     }
 
-    private static void handleInput(String input, TaskList taskList) throws DeltaException {
+    private static void handleInput(String input, TaskList taskList, Storage storage) throws DeltaException {
         String trimmedInput = input.trim();
 
         if (trimmedInput.isEmpty()) {
@@ -91,6 +99,11 @@ public class Delta {
                 } else {
                     taskList.deleteTask(index);
                 }
+                try {
+                    storage.save(taskList);
+                } catch (IOException e) {
+                    System.out.println("Unable to save to hard disk: " + e.getMessage());
+                }
                 break;
             }
 
@@ -99,6 +112,12 @@ public class Delta {
                     throw new DeltaException("Usage: todo <description>");
                 }
                 taskList.addTask(new ToDo(splitInput[1].trim()));
+
+                try {
+                    storage.save(taskList);
+                } catch (IOException e) {
+                    System.out.println("Unable to save to hard disk: " + e.getMessage());
+                }
                 break;
             }
 
@@ -121,6 +140,12 @@ public class Delta {
                     throw new DeltaException("Usage: deadline <description> /by <date>");
                 }
                 taskList.addTask(new Deadline(description, by));
+
+                try {
+                    storage.save(taskList);
+                } catch (IOException e) {
+                    System.out.println("Unable to save to hard disk: " + e.getMessage());
+                }
                 break;
             }
 
@@ -150,6 +175,12 @@ public class Delta {
                     throw new DeltaException("Usage: event <description> /from <start> /to <end>");
                 }
                 taskList.addTask(new Event(description, from, to));
+
+                try {
+                    storage.save(taskList);
+                } catch (IOException e) {
+                    System.out.println("Unable to save to hard disk: " + e.getMessage());
+                }
                 break;
             }
         }
