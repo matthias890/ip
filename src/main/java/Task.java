@@ -4,7 +4,11 @@ abstract class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     private String getStatusIcon() {
@@ -13,6 +17,37 @@ abstract class Task {
 
     public void updateStatus(boolean bool) {
         this.isDone = bool;
+    }
+
+    public String convertToStorageFormat() {
+        String done = isDone ? "1" : "0";
+        return String.format("%s | %s", done, this.description);
+    }
+
+    public static Task convertFromStorageFormat(String fileTask) throws DeltaException {
+        String[] parts = fileTask.split(" \\| "); // split on ' | '
+
+        if (parts.length < 3) {
+            throw new DeltaException("Bad record: " + fileTask);
+        }
+        
+        String taskType = parts[0];
+        boolean isTaskDone = parts[1].equals("1");
+        String taskDescription = parts[2];
+
+        switch(taskType) {
+        case "T":
+            return new ToDo(taskDescription, isTaskDone);
+
+        case "D":
+            return new Deadline(taskDescription, isTaskDone, parts[3]);
+
+        case "E":
+            return new Event(taskDescription, isTaskDone, parts[3], parts[4]);
+
+        default:
+            throw new DeltaException("Unknown task type");
+        }
     }
 
     @Override
