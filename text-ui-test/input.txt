@@ -1,9 +1,6 @@
 todo read book
 deadline return book /by Mon
-event project meeting /from Mon 2pm /to 4pm
+event project meeting /from Aug 30 2025 1200 /to Aug 30 2025 1400
 mark 1
-list
-delete 4
-delete 3
 list
 bye
