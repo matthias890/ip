@@ -4,16 +4,32 @@ import bugsbunny.parsers.DateTimeParser;
 
 import java.time.LocalDateTime;
 
+/**
+ * A time-bounded task with a start and end.
+ */
 public class Event extends Task {
     private LocalDateTime from;
     private LocalDateTime to;
 
+    /**
+     * @param description Task name.
+     * @param from Start date-time.
+     * @param to End date-time.
+     */
     public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
         this.from = from;
         this.to = to;
     }
 
+    /**
+     * Used only by {@link #convertFromStorageFormat(String)}.
+     *
+     * @param description Task name.
+     * @param isDone Completion status.
+     * @param from Start date-time.
+     * @param to End date-time.
+     */
     public Event(String description, boolean isDone, LocalDateTime from, LocalDateTime to) {
         super(description, isDone);
         this.from = from;

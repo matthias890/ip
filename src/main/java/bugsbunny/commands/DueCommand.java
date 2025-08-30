@@ -9,13 +9,22 @@ import bugsbunny.tasks.TaskList;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Gets the list of tasks that are due by a specified date and time.
+ */
 public class DueCommand extends Command {
     private LocalDateTime dueDate;
 
+    /**
+     * @param dueDate Due date/time.
+     */
     public DueCommand(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> dueTasks = tasks.getTasksDueBy(this.dueDate);

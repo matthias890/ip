@@ -2,11 +2,23 @@ package bugsbunny.tasks;
 
 import java.time.LocalDateTime;
 
+/**
+ * A simple to-do task that has no date/time.
+ */
 public class ToDo extends Task {
+    /**
+     * @param description Task name.
+     */
     public ToDo(String description) {
         super(description);
     }
 
+    /**
+     * Used only by {@link #convertFromStorageFormat(String)}.
+     *
+     * @param description Task name.
+     * @param isDone Completion status.
+     */
     public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }

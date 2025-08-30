@@ -8,11 +8,19 @@ import bugsbunny.exception.BugsBunnyException;
 
 import java.io.IOException;
 
+/**
+ * Application entry point for the BugsBunny chatbot.
+ */
 public class BugsBunny {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates the app and attempts to load tasks from the given file path.
+     *
+     * @param filePath relative path to the save file. i.e. {@code data/tasks.txt}
+     */
     public BugsBunny(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
@@ -24,6 +32,9 @@ public class BugsBunny {
         }
     }
 
+    /**
+     * Runs the chatbot: reads commands, executes them, and exits when requested.
+     */
     public void run() {
         ui.showWelcome();
         System.out.println();
@@ -48,12 +59,5 @@ public class BugsBunny {
 
     public static void main(String[] args) {
         new BugsBunny("data/tasks.txt").run();
-    }
-
-    private static void printLine() {
-        for (int i = 0; i < 50; i++) {
-            System.out.print("_");
-        }
-        System.out.println();
     }
 }

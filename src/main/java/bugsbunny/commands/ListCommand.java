@@ -7,8 +7,14 @@ import bugsbunny.tasks.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * Prints the current list of task to the chat.
+ */
 public class ListCommand extends Command {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> list = tasks.getList();

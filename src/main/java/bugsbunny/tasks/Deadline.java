@@ -4,14 +4,28 @@ import bugsbunny.parsers.DateTimeParser;
 
 import java.time.LocalDateTime;
 
+/**
+ * A task with a due moment.
+ */
 public class Deadline extends Task {
     private LocalDateTime by;
 
+    /**
+     * @param description Task name.
+     * @param by Due date-time (inclusive).
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Used only by {@link #convertFromStorageFormat(String)}.
+     *
+     * @param description Task name.
+     * @param isDone Completion status.
+     * @param by Due date-time (inclusive).
+     */
     public Deadline(String description, boolean isDone, LocalDateTime by) {
         super(description, isDone);
         this.by = by;

@@ -12,15 +12,29 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles persistence of tasks to/from a plain text file.
+ * <p>
+ * Creates missing directories/files on first run and skips corrupted lines on load.
+ */
 public class Storage {
     private Path filePath;
     private String filePathString;
 
+    /**
+     * @param filePath Relative path to the save file, i.e. {@code data/tasks.txt}.
+     */
     public Storage(String filePath) {
         this.filePath = Paths.get(filePath);
         this.filePathString = filePath;
     }
 
+    /**
+     * Loads tasks from disk. Creates the file if it does not exist.
+     *
+     * @return A {@link TaskList} populated from disk (possibly empty).
+     * @throws IOException if I/O fails while accessing the file system.
+     */
     public TaskList load() throws IOException {
         // Check if file exists
         if (Files.notExists(this.filePath)) {
@@ -56,6 +70,12 @@ public class Storage {
         return new TaskList(list);
     }
 
+    /**
+     * Persists the given task list to disk, overwriting the existing file.
+     *
+     * @param taskList Tasks to write.
+     * @throws IOException If writing fails.
+     */
     public void save(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.filePathString);
         ArrayList<Task> list = taskList.getList();

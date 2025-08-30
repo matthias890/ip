@@ -2,6 +2,9 @@ package bugsbunny.app;
 
 import java.util.Scanner;
 
+/**
+ * Handles all the console input and output for the chatbot.
+ */
 public class Ui {
     private Scanner scanner;
 
@@ -9,6 +12,9 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Prints the ASCII welcome banner of Bugs Bunny.
+     */
     public void showWelcome() {
         // Art by Shanaka Dias, obtained from https://www.asciiart.eu/cartoons/looney-tunes
         System.out.printf("              , ,\n");
@@ -39,6 +45,9 @@ public class Ui {
         System.out.printf("                  '.\\_)\n");
     }
 
+    /**
+     * Prints the usage examples.
+     */
     public void showCommandGuide() {
         System.out.println("You can chat with me using the following commands:");
         System.out.println(" help: Show this guide. Syntax: help");
@@ -53,27 +62,49 @@ public class Ui {
         System.out.println(" bye: Exit the chat");
     }
 
+    /**
+     * Prints a horizontal line.
+     */
     public void showLine() {
         System.out.println("________________________________________________________________");
     }
 
+    /**
+     * Reads a line of user input.
+     *
+     * @return The trimmed user's input.
+     */
     public String readCommand() {
         return this.scanner.nextLine().trim();
     }
 
+    /**
+     * Prints a user-friendly error message.
+     *
+     * @param s The error message.
+     */
     public void showError(String s) {
         System.out.println("Neeah, there's a problem Doc:");
         System.out.println(" " + s);
     }
 
+    /**
+     * Prints a message to indicate error loading from the hard disk.
+     */
     public void showLoadingError() {
         System.out.println("Neeah, I can't load from the hard disk Doc");
     }
 
+    /**
+     * Prints a message to indicate error saving to the hard disk.
+     */
     public void showSavingError() {
         System.out.println("Neeah, I can't save to the hard disk Doc");
     }
 
+    /**
+     * Prints a goodbye message and closes the scanner.
+     */
     public void showGoodbye() {
         System.out.println("So long, Doc!");
         this.scanner.close();

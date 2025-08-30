@@ -5,14 +5,29 @@ import bugsbunny.parsers.DateTimeParser;
 
 import java.time.LocalDateTime;
 
+/**
+ * Base type for all tasks. Contains shared state (description, done flag)
+ * and storage/formatting helpers.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Used when creating a new task.
+     *
+     * @param description Description of task.
+     */
     public Task(String description) {
         this.description = description;
     }
 
+    /**
+     * Used only by {@link #convertFromStorageFormat(String)}.
+     *
+     * @param description Description of task.
+     * @param isDone Status completion.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -22,15 +37,28 @@ public abstract class Task {
         return isDone ? "X" : " ";
     }
 
+    /**
+     * Updates the completion status.
+     */
     public void updateStatus(boolean bool) {
         this.isDone = bool;
     }
 
+    /**
+     * @return Storage-friendly string like {@code "1 | submit report"}.
+     */
     public String convertToStorageFormat() {
         String done = isDone ? "1" : "0";
         return String.format("%s | %s", done, this.description);
     }
 
+    /**
+     * Parses a line from storage into a typed task.
+     *
+     * @param fileTask The line from the save file.
+     * @return The reconstructed task.
+     * @throws BugsBunnyException If the line is malformed or has an unknown type.
+     */
     public static Task convertFromStorageFormat(String fileTask) throws BugsBunnyException {
         String[] parts = fileTask.split(" \\| "); // split on ' | '
 
@@ -70,25 +98,14 @@ public abstract class Task {
         }
     }
 
+    /**
+     * @param dateTime Cutoff date-time.
+     * @return Whether this task is considered "due by" the given time.
+     */
     public abstract boolean isDueBy(LocalDateTime dateTime);
 
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-
-        if (!(object instanceof Task)) {
-            return false;
-        }
-
-        Task task = (Task) object;
-
-        return this.description.equals(task.description);
     }
 }

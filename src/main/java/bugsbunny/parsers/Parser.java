@@ -15,7 +15,18 @@ import bugsbunny.exception.BugsBunnyException;
 
 import java.time.LocalDateTime;
 
+/**
+ * Parses raw user input into typed {@link bugsbunny.commands.Command} objects.
+ */
 public class Parser {
+
+    /**
+     * Parses the given input string into a concrete command.
+     *
+     * @param input Raw user input, e.g., {@code "deadline submit /by 2025-08-30 1300"}.
+     * @return A command instance ready to execute.
+     * @throws BugsBunnyException If the input is malformed or uses unknown commands.
+     */
     public static Command parse(String input) throws BugsBunnyException {
         if (input == null) {
             return new ExitCommand(); // null input shouldn't happen
