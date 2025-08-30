@@ -52,4 +52,21 @@ public class TaskList {
         }
         return dueTasks;
     }
+
+    /**
+     * Filters tasks based on whether the task contains the keyword in its description.
+     *
+     * @param keyword Object of interest.
+     * @return A new list containing tasks that contains the {@code keyword}.
+     */
+    public ArrayList<Task> getMatchingTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+
+        for (Task task : this.list) {
+            if (task.hasKeyword(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
 }

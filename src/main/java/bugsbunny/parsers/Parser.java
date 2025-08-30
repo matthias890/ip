@@ -11,6 +11,7 @@ import bugsbunny.commands.DeleteCommand;
 import bugsbunny.commands.AddToDoCommand;
 import bugsbunny.commands.AddEventCommand;
 import bugsbunny.commands.AddDeadlineCommand;
+import bugsbunny.commands.FindCommand;
 import bugsbunny.exception.BugsBunnyException;
 
 import java.time.LocalDateTime;
@@ -39,6 +40,14 @@ public class Parser {
 
             case "list": {
                 return new ListCommand();
+            }
+
+            case "find": {
+                if (firstSplit.length < 2) {
+                    throw new BugsBunnyException("Usage: find <keyword>");
+                }
+
+                return new FindCommand(firstSplit[1].trim());
             }
 
             case "due": {

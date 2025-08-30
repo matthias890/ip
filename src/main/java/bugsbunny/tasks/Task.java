@@ -72,6 +72,16 @@ public abstract class Task {
 
     public abstract boolean isDueBy(LocalDateTime dateTime);
 
+    /**
+     * Checks if the description of the task contains the keyword.
+     *
+     * @param keyword Object of interest.
+     * @return {@code true} if the task's description contains the keyword, else {@code false}.
+     */
+    public boolean hasKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);

@@ -49,11 +49,4 @@ public class BugsBunny {
     public static void main(String[] args) {
         new BugsBunny("data/tasks.txt").run();
     }
-
-    private static void printLine() {
-        for (int i = 0; i < 50; i++) {
-            System.out.print("_");
-        }
-        System.out.println();
-    }
 }
