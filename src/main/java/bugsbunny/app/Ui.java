@@ -60,6 +60,8 @@ public class Ui {
         System.out.println(" event: Create an event task. " +
                 "Syntax: event <task name> /from <yyyy-mm-dd hhmm> /to <yyyy-mm-dd hhmm>");
         System.out.println(" due: Shows the tasks that are due by this date and time. Syntax: due <yyyy-mm-dd hhmm>");
+        System.out.println(" find: Shows the tasks that have the keyword in their name/description. " +
+                "Syntax: find <keyword>");
         System.out.println(" bye: Exit the chat");
     }
 
