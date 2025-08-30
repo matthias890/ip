@@ -1,3 +1,5 @@
+package bugsbunny.app;
+
 import java.util.Scanner;
 
 public class Ui {

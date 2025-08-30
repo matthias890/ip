@@ -1,3 +1,7 @@
+package bugsbunny.tasks;
+
+import bugsbunny.parsers.DateTimeParser;
+
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {

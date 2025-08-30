@@ -1,6 +1,11 @@
+package bugsbunny.tasks;
+
+import bugsbunny.exception.BugsBunnyException;
+import bugsbunny.parsers.DateTimeParser;
+
 import java.time.LocalDateTime;
 
-abstract class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 

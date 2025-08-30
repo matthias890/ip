@@ -1,3 +1,5 @@
+package bugsbunny.parsers;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -7,7 +9,7 @@ public class DateTimeParser {
     public static final DateTimeFormatter INPUT_TO_DATE_TIME =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
-    // date time formatter to convert LocalDateTime to Storage String and vice versa
+    // date time formatter to convert LocalDateTime to bugsbunny.storage.Storage String and vice versa
     public static final DateTimeFormatter DATE_TIME_STRING_FORMATTER =
             DateTimeFormatter.ofPattern("MMM d yyyy, EEE h.mma"); // Aug 30 2025, Sat 1.00pm
 

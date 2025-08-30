@@ -1,3 +1,8 @@
+package bugsbunny.storage;
+
+import bugsbunny.tasks.Task;
+import bugsbunny.tasks.TaskList;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;

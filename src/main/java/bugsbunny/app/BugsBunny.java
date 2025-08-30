@@ -1,6 +1,12 @@
+package bugsbunny.app;
+
+import bugsbunny.commands.Command;
+import bugsbunny.parsers.Parser;
+import bugsbunny.storage.Storage;
+import bugsbunny.tasks.TaskList;
+import bugsbunny.exception.BugsBunnyException;
+
 import java.io.IOException;
-import java.util.Scanner;
-import java.time.LocalDateTime;
 
 public class BugsBunny {
     private Storage storage;

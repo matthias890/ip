@@ -1,3 +1,10 @@
+package bugsbunny.commands;
+
+import bugsbunny.app.Ui;
+import bugsbunny.exception.BugsBunnyException;
+import bugsbunny.storage.Storage;
+import bugsbunny.tasks.TaskList;
+
 public class HelpCommand extends Command {
 
     @Override

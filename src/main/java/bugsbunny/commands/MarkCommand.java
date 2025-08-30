@@ -1,6 +1,13 @@
+package bugsbunny.commands;
+
+import bugsbunny.app.Ui;
+import bugsbunny.exception.BugsBunnyException;
+import bugsbunny.storage.Storage;
+import bugsbunny.tasks.TaskList;
+
 import java.io.IOException;
 
-public class MarkCommand extends Command{
+public class MarkCommand extends Command {
     private int index;
 
     public MarkCommand(int index) {

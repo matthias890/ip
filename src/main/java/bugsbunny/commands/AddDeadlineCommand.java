@@ -1,20 +1,27 @@
+package bugsbunny.commands;
+
+import bugsbunny.app.Ui;
+import bugsbunny.storage.Storage;
+import bugsbunny.tasks.Deadline;
+import bugsbunny.tasks.Task;
+import bugsbunny.tasks.TaskList;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class AddEventCommand extends Command {
-    private String taskName;
-    private LocalDateTime from;
-    private LocalDateTime to;
 
-    public AddEventCommand(String taskName, LocalDateTime from, LocalDateTime to) {
+public class AddDeadlineCommand extends Command {
+    private String taskName;
+    private LocalDateTime by;
+
+    public AddDeadlineCommand(String taskName, LocalDateTime by) {
         this.taskName = taskName;
-        this.from = from;
-        this.to = to;
+        this.by = by;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task t = new Event(this.taskName, this.from, this.to);
+        Task t = new Deadline(this.taskName, this.by);
         tasks.addTask(t);
         System.out.println("OK Doc, I've added this task:");
         System.out.println(" "+ t.toString());
