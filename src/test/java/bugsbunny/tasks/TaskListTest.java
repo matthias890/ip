@@ -3,9 +3,10 @@ package bugsbunny.tasks;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskListTest {
 
@@ -19,7 +20,7 @@ class TaskListTest {
         taskList.addTask(new Deadline("report", LocalDateTime.of(2025, 8, 30, 14, 0))); // due
         taskList.addTask(new Deadline("slides", LocalDateTime.of(2025, 8, 30, 18, 0))); // not due
 
-        List<Task> dueTasks = taskList.getTasksDueBy(cutoff);
+        ArrayList<Task> dueTasks = taskList.getTasksDueBy(cutoff);
 
         assertEquals(1, dueTasks.size(), "Only one task should be due by 16:00");
         assertEquals("report", dueTasks.get(0).description, "The due task should be 'report'");
@@ -31,7 +32,7 @@ class TaskListTest {
 
         LocalDateTime cutoff = LocalDateTime.of(2025, 8, 30, 16, 0);
 
-        List<Task> dueTasks = taskList.getTasksDueBy(cutoff);
+        ArrayList<Task> dueTasks = taskList.getTasksDueBy(cutoff);
 
         assertTrue(dueTasks.isEmpty(), "Empty task list should return empty due tasks");
     }
