@@ -24,6 +24,7 @@ public class BugsBunny {
     public BugsBunny(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
+
         try {
             tasks = storage.load();
         } catch (IOException e) {
