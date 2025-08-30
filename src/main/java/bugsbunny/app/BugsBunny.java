@@ -16,6 +16,7 @@ public class BugsBunny {
     public BugsBunny(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
+
         try {
             tasks = storage.load();
         } catch (IOException e) {
@@ -48,12 +49,5 @@ public class BugsBunny {
 
     public static void main(String[] args) {
         new BugsBunny("data/tasks.txt").run();
-    }
-
-    private static void printLine() {
-        for (int i = 0; i < 50; i++) {
-            System.out.print("_");
-        }
-        System.out.println();
     }
 }

@@ -48,7 +48,8 @@ public class Ui {
         System.out.println(" delete: Delete a task. Syntax: delete <task index>");
         System.out.println(" todo: Create a todo task. Syntax: todo <task name>");
         System.out.println(" deadline: Create a deadline task. Syntax: deadline <task name> /by <yyyy-mm-dd hhmm>");
-        System.out.println(" event: Create an event task. Syntax: event <task name> /from <yyyy-mm-dd hhmm> /to <yyyy-mm-dd hhmm>");
+        System.out.println(" event: Create an event task. " +
+                "Syntax: event <task name> /from <yyyy-mm-dd hhmm> /to <yyyy-mm-dd hhmm>");
         System.out.println(" due: Shows the tasks that are due by this date and time. Syntax: due <yyyy-mm-dd hhmm>");
         System.out.println(" bye: Exit the chat");
     }
