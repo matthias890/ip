@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class ToDo extends Task {
     public ToDo(String description) {
         super(description);
@@ -10,6 +12,11 @@ public class ToDo extends Task {
     @Override
     public String convertToStorageFormat() {
         return String.format("T | %s", super.convertToStorageFormat());
+    }
+
+    @Override
+    public boolean isDueBy(LocalDateTime dateTime) {
+        return false;
     }
 
     @Override

@@ -1,4 +1,4 @@
-# Delta User Guide
+# BugsBunny User Guide
 
 // Update the title above to match the actual product name
 
