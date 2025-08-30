@@ -32,7 +32,7 @@ public class Storage {
 
         // file exists already
         Scanner scanner = new Scanner(this.filePath);
-        ArrayList<Task> list = new ArrayList<>(100);
+        ArrayList<Task> list = new ArrayList<>();
 
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();

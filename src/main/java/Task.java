@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -24,11 +26,11 @@ abstract class Task {
         return String.format("%s | %s", done, this.description);
     }
 
-    public static Task convertFromStorageFormat(String fileTask) throws DeltaException {
+    public static Task convertFromStorageFormat(String fileTask) throws BugsBunnyException {
         String[] parts = fileTask.split(" \\| "); // split on ' | '
 
         if (parts.length < 3) {
-            throw new DeltaException("Bad record: " + fileTask);
+            throw new BugsBunnyException("Bad record: " + fileTask);
         }
         
         String taskType = parts[0];
@@ -41,27 +43,29 @@ abstract class Task {
 
         case "D":
             if (parts.length < 4) {
-                throw new DeltaException("Bad deadline record: " + fileTask);
+                throw new BugsBunnyException("Bad deadline record: " + fileTask);
             }
             return new Deadline(
                     taskDescription,
                     isTaskDone,
-                    DateTimeParser.parseDateTime(parts[3]));
+                    DateTimeParser.parseStringToDateTime(parts[3], DateTimeParser.DATE_TIME_STRING_FORMATTER));
 
         case "E":
             if (parts.length < 5) {
-                throw new DeltaException("Bad event record: " + fileTask);
+                throw new BugsBunnyException("Bad event record: " + fileTask);
             }
             return new Event(
                     taskDescription,
                     isTaskDone,
-                    DateTimeParser.parseDateTime(parts[3]),
-                    DateTimeParser.parseDateTime(parts[4]));
+                    DateTimeParser.parseStringToDateTime(parts[3], DateTimeParser.DATE_TIME_STRING_FORMATTER),
+                    DateTimeParser.parseStringToDateTime(parts[4], DateTimeParser.DATE_TIME_STRING_FORMATTER));
 
         default:
-            throw new DeltaException("Unknown task type: " + taskType);
+            throw new BugsBunnyException("Unknown task type: " + taskType);
         }
     }
+
+    public abstract boolean isDueBy(LocalDateTime dateTime);
 
     @Override
     public String toString() {

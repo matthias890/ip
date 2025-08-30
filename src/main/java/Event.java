@@ -1,8 +1,8 @@
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    private LocalDateTime from;
+    private LocalDateTime to;
 
     public Event(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
@@ -21,8 +21,13 @@ public class Event extends Task {
         return String.format(
                 "E | %s | %s | %s",
                 super.convertToStorageFormat(),
-                this.from.format(DateTimeParser.DATE_TIME_FORMATTER),
-                this.to);
+                this.from.format(DateTimeParser.DATE_TIME_STRING_FORMATTER),
+                this.to.format(DateTimeParser.DATE_TIME_STRING_FORMATTER));
+    }
+
+    @Override
+    public boolean isDueBy(LocalDateTime dateTime) {
+        return !this.from.isAfter(dateTime);
     }
 
     @Override
@@ -31,7 +36,7 @@ public class Event extends Task {
                 "[%s]%s (from: %s to: %s)",
                 "E",
                 super.toString(),
-                this.from.format(DateTimeParser.DATE_TIME_FORMATTER),
-                this.to.format(DateTimeParser.DATE_TIME_FORMATTER));
+                this.from.format(DateTimeParser.DATE_TIME_STRING_FORMATTER),
+                this.to.format(DateTimeParser.DATE_TIME_STRING_FORMATTER));
     }
 }
