@@ -7,13 +7,22 @@ import bugsbunny.tasks.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Marks a task as done and saves the updated state.
+ */
 public class MarkCommand extends Command {
     private int index;
 
+    /**
+     * @param index Task index to mark.
+     */
     public MarkCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
         if (this.index < 0 || this.index >= tasks.getNumberOfTasks()) {
