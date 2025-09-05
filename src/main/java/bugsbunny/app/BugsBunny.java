@@ -1,12 +1,12 @@
 package bugsbunny.app;
 
+import java.io.IOException;
+
 import bugsbunny.commands.Command;
+import bugsbunny.exception.BugsBunnyException;
 import bugsbunny.parsers.Parser;
 import bugsbunny.storage.Storage;
 import bugsbunny.tasks.TaskList;
-import bugsbunny.exception.BugsBunnyException;
-
-import java.io.IOException;
 
 /**
  * Application entry point for the BugsBunny chatbot.

@@ -1,9 +1,9 @@
 package bugsbunny.tasks;
 
+import java.time.LocalDateTime;
+
 import bugsbunny.exception.BugsBunnyException;
 import bugsbunny.parsers.DateTimeParser;
-
-import java.time.LocalDateTime;
 
 /**
  * Base type for all tasks. Contains shared state (description, done flag)
@@ -65,7 +65,6 @@ public abstract class Task {
         if (parts.length < 3) {
             throw new BugsBunnyException("Bad record: " + fileTask);
         }
-        
         String taskType = parts[0];
         boolean isTaskDone = parts[1].equals("1");
         String taskDescription = parts[2];

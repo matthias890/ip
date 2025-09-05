@@ -1,16 +1,15 @@
 package bugsbunny.storage;
 
-import bugsbunny.tasks.Task;
-import bugsbunny.tasks.TaskList;
-
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.io.IOException;
-import java.io.FileWriter;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import bugsbunny.tasks.Task;
+import bugsbunny.tasks.TaskList;
 
 /**
  * Handles persistence of tasks to/from a plain text file.

@@ -1,8 +1,8 @@
 package bugsbunny.tasks;
 
-import bugsbunny.parsers.DateTimeParser;
-
 import java.time.LocalDateTime;
+
+import bugsbunny.parsers.DateTimeParser;
 
 /**
  * A task with a due moment.

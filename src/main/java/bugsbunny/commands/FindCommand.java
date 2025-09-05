@@ -1,12 +1,12 @@
 package bugsbunny.commands;
 
+import java.util.ArrayList;
+
 import bugsbunny.app.Ui;
 import bugsbunny.exception.BugsBunnyException;
 import bugsbunny.storage.Storage;
 import bugsbunny.tasks.Task;
 import bugsbunny.tasks.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * Command that searches task descriptions that match the given query strings (case-insensitive).

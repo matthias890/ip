@@ -1,13 +1,15 @@
 package bugsbunny.commands;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+
 import bugsbunny.app.Ui;
 import bugsbunny.storage.Storage;
 import bugsbunny.tasks.Deadline;
 import bugsbunny.tasks.Task;
 import bugsbunny.tasks.TaskList;
 
-import java.io.IOException;
-import java.time.LocalDateTime;
+
 
 /**
  * Adds a {@link bugsbunny.tasks.Deadline} task to the list and saves the updated state.
@@ -33,7 +35,7 @@ public class AddDeadlineCommand extends Command {
         Task t = new Deadline(this.taskName, this.by);
         tasks.addTask(t);
         System.out.println("OK Doc, I've added this task:");
-        System.out.println(" "+ t.toString());
+        System.out.println(" " + t);
         System.out.println(String.format("Now you have %d tasks in the list.", tasks.getNumberOfTasks()));
 
         try {
