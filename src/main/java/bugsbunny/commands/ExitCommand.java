@@ -14,8 +14,8 @@ public class ExitCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
-        ui.showGoodbye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
+        return ui.showGoodbye();
     }
 
     /**

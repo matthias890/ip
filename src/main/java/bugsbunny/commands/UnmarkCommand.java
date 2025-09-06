@@ -24,19 +24,19 @@ public class UnmarkCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
         if (this.index < 0 || this.index >= tasks.getNumberOfTasks()) {
             throw new BugsBunnyException("The task number is out of range");
         }
 
         tasks.unmarkTask(this.index);
-        System.out.println("OK Doc, I've marked this task as not done yet:");
-        System.out.println(" " + tasks.getTask(index).toString());
+        String output = "OK Doc, I've marked this task as not done yet:\n " + tasks.getTask(index);
 
         try {
             storage.save(tasks);
         } catch (IOException e) {
-            ui.showSavingError();
+            output += ui.showSavingError();
         }
+        return output;
     }
 }

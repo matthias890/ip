@@ -23,6 +23,9 @@ import bugsbunny.exception.BugsBunnyException;
  */
 public class Parser {
 
+    public static boolean isExitType(String input) {
+        return input.split(" ", 2)[0].equalsIgnoreCase("bye");
+    }
     /**
      * Parses the given input string into a concrete command.
      *

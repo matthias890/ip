@@ -16,12 +16,13 @@ public class ListCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> list = tasks.getList();
-        System.out.println("Here are the tasks in your list:");
+        String output = "Here are the tasks in your list:";
 
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(String.format(" %d. %s", i + 1, list.get(i).toString()));
+            output += String.format("\n %d. %s", i + 1, list.get(i).toString());
         }
+        return output;
     }
 }

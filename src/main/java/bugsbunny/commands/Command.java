@@ -16,9 +16,10 @@ public abstract class Command {
      * @param tasks The collection of tasks.
      * @param ui The UI used for printing messages to the chatbot.
      * @param storage The storage used for saving and loading from the hard disk.
+     * @return Output string of the chatbot's response
      * @throws BugsBunnyException if command validation fails.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException;
 
     /**
      * Checks if the command is an Exit Command.

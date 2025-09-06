@@ -12,17 +12,16 @@ import bugsbunny.tasks.TaskList;
  * Application entry point for the BugsBunny chatbot.
  */
 public class BugsBunny {
+    private static final String DEFAULT_FILE_PATH = "data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
      * Creates the app and attempts to load tasks from the given file path.
-     *
-     * @param filePath relative path to the save file. i.e. {@code data/tasks.txt}
      */
-    public BugsBunny(String filePath) {
-        storage = new Storage(filePath);
+    public BugsBunny() {
+        storage = new Storage(BugsBunny.DEFAULT_FILE_PATH);
         ui = new Ui();
 
         try {
@@ -34,12 +33,24 @@ public class BugsBunny {
     }
 
     /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (BugsBunnyException e) {
+            return ui.showError(e.getMessage());
+        }
+    }
+
+    /**
      * Runs the chatbot: reads commands, executes them, and exits when requested.
      */
     public void run() {
         ui.showWelcome();
         System.out.println();
-        ui.showCommandGuide();
+        System.out.println(ui.showCommandGuide());
         ui.showLine();
         boolean isExit = false;
 
@@ -48,10 +59,11 @@ public class BugsBunny {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                String output = c.execute(tasks, ui, storage);
+                System.out.println(output);
                 isExit = c.isExit();
             } catch (BugsBunnyException e) {
-                ui.showError(e.getMessage());
+                System.out.println(ui.showError(e.getMessage()));
             } finally {
                 ui.showLine();
             }
@@ -59,6 +71,6 @@ public class BugsBunny {
     }
 
     public static void main(String[] args) {
-        new BugsBunny("data/tasks.txt").run();
+        new BugsBunny().run();
     }
 }
