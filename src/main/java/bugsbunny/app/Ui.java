@@ -46,23 +46,22 @@ public class Ui {
     }
 
     /**
-     * Prints the usage examples.
+     * Returns the usage examples.
      */
-    public void showCommandGuide() {
-        System.out.println("You can chat with me using the following commands:");
-        System.out.println(" help: Show this guide. Syntax: help");
-        System.out.println(" list: List all the tasks you have created so far. Syntax: list");
-        System.out.println(" mark: Mark a task as completed. Syntax: mark <task index>");
-        System.out.println(" unmark: Mark a task as not completed. Syntax: unmark <task index>");
-        System.out.println(" delete: Delete a task. Syntax: delete <task index>");
-        System.out.println(" todo: Create a todo task. Syntax: todo <task name>");
-        System.out.println(" deadline: Create a deadline task. Syntax: deadline <task name> /by <yyyy-mm-dd hhmm>");
-        System.out.println(" event: Create an event task. "
-                + "Syntax: event <task name> /from <yyyy-mm-dd hhmm> /to <yyyy-mm-dd hhmm>");
-        System.out.println(" due: Shows the tasks that are due by this date and time. Syntax: due <yyyy-mm-dd hhmm>");
-        System.out.println(" find: Shows the tasks that have the keyword in their name/description. "
-                + "Syntax: find <keyword>");
-        System.out.println(" bye: Exit the chat");
+    public String showCommandGuide() {
+        return "You can chat with me using the following commands:\n"
+                + " help: Show this guide. Syntax: help\n"
+                + " list: List all the tasks you have created so far. Syntax: list\n"
+                + " mark: Mark a task as completed. Syntax: mark <task index>\n"
+                + " unmark: Mark a task as not completed. Syntax: unmark <task index>\n"
+                + " delete: Delete a task. Syntax: delete <task index>\n"
+                + " todo: Create a todo task. Syntax: todo <task name>\n"
+                + " deadline: Create a deadline task. Syntax: deadline <task name> /by <yyyy-mm-dd hhmm>\n"
+                + " event: Create an event task. "
+                + "Syntax: event <task name> /from <yyyy-mm-dd hhmm> /to <yyyy-mm-dd hhmm>\n"
+                + " due: Shows the tasks that are due by this date and time. Syntax: due <yyyy-mm-dd hhmm>\n"
+                + " find: Shows the tasks that have the keyword in their name/description. Syntax: find <keyword>\n"
+                + " bye: Exit the chat";
     }
 
     /**
@@ -82,35 +81,35 @@ public class Ui {
     }
 
     /**
-     * Prints a user-friendly error message.
+     * Returns a user-friendly error message.
      *
      * @param s The error message.
      */
-    public void showError(String s) {
-        System.out.println("Neeah, there's a problem Doc:");
-        System.out.println(" " + s);
+    public String showError(String s) {
+        return "Neeah, there's a problem Doc:\n"
+                + " " + s;
     }
 
     /**
-     * Prints a message to indicate error loading from the hard disk.
+     * Returns a message to indicate error loading from the hard disk.
      */
-    public void showLoadingError() {
-        System.out.println("Neeah, I can't load from the hard disk Doc");
+    public String showLoadingError() {
+        return "Neeah, I can't load from the hard disk Doc";
     }
 
     /**
-     * Prints a message to indicate error saving to the hard disk.
+     * Returns a message to indicate error saving to the hard disk.
      */
-    public void showSavingError() {
-        System.out.println("Neeah, I can't save to the hard disk Doc");
+    public String showSavingError() {
+        return "Neeah, I can't save to the hard disk Doc";
     }
 
     /**
-     * Prints a goodbye message and closes the scanner.
+     * Returns a goodbye message and closes the scanner.
      */
-    public void showGoodbye() {
-        System.out.println("So long, Doc!");
+    public String showGoodbye() {
         this.scanner.close();
+        return "So long, Doc!";
     }
 }
 

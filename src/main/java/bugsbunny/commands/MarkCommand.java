@@ -24,19 +24,19 @@ public class MarkCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
         if (this.index < 0 || this.index >= tasks.getNumberOfTasks()) {
             throw new BugsBunnyException("The task number is out of range");
         }
 
         tasks.markTask(this.index);
-        System.out.println("OK Doc, I've marked this task as done:");
-        System.out.println(" " + tasks.getTask(index).toString());
+        String output = "OK Doc, I've marked this task as done:\n " + tasks.getTask(index);
 
         try {
             storage.save(tasks);
         } catch (IOException e) {
-            ui.showSavingError();
+            output += ui.showSavingError();
         }
+        return output;
     }
 }

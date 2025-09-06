@@ -31,17 +31,24 @@ public class AddDeadlineCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = new Deadline(this.taskName, this.by);
         tasks.addTask(t);
-        System.out.println("OK Doc, I've added this task:");
-        System.out.println(" " + t);
-        System.out.println(String.format("Now you have %d tasks in the list.", tasks.getNumberOfTasks()));
+        String output = String.format(
+                "OK Doc, I've added this task:\n"
+                        + " %s\n"
+                        + "Now you have %d tasks in the list.",
+                t,
+                tasks.getNumberOfTasks()
+
+        );
 
         try {
             storage.save(tasks);
         } catch (IOException e) {
-            ui.showSavingError();
+            output += ui.showSavingError();
         }
+
+        return output;
     }
 }

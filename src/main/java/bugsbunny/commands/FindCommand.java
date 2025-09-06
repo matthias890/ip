@@ -28,17 +28,21 @@ public class FindCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
         ArrayList<Task> matchingTasks = tasks.getMatchingTasks(this.keyword);
 
+        String output;
+
         if (matchingTasks.isEmpty()) {
-            System.out.println("I couldn't find any tasks that have that keyword in their name/description Doc");
+            output = "I couldn't find any tasks that have that keyword in their name/description Doc";
         } else {
-            System.out.println("Good news Doc! I found the matching tasks in you list: ");
+            output = "Good news Doc! I found the matching tasks in you list:";
 
             for (int i = 0; i < matchingTasks.size(); i++) {
-                System.out.println(String.format(" %d. %s", i + 1, matchingTasks.get(i).toString()));
+                output += String.format("\n %d. %s", i + 1, matchingTasks.get(i));
             }
         }
+
+        return output;
     }
 }

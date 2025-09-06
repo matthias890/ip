@@ -26,18 +26,22 @@ public class DueCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> dueTasks = tasks.getTasksDueBy(this.dueDate);
 
+        String output;
+
         if (dueTasks.isEmpty()) {
-            System.out.println("You have no tasks that are due by "
-                    + this.dueDate.format(DateTimeParser.DATE_TIME_STRING_FORMATTER));
+            output = "You have no tasks that are due by "
+                    + this.dueDate.format(DateTimeParser.DATE_TIME_STRING_FORMATTER);
         } else {
-            System.out.println("Here are the tasks that are due by "
-                    + this.dueDate.format(DateTimeParser.DATE_TIME_STRING_FORMATTER));
+            output = "Here are the tasks that are due by "
+                    + this.dueDate.format(DateTimeParser.DATE_TIME_STRING_FORMATTER);
             for (int i = 0; i < dueTasks.size(); i++) {
-                System.out.println(String.format(" %d. %s", i + 1, dueTasks.get(i).toString()));
+                output += String.format("\n %d. %s", i + 1, dueTasks.get(i));
             }
         }
+
+        return output;
     }
 }

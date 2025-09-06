@@ -25,21 +25,28 @@ public class DeleteCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
         if (this.index < 0 || this.index >= tasks.getNumberOfTasks()) {
             throw new BugsBunnyException("The task number is out of range");
         }
 
         Task t = tasks.getTask(index);
         tasks.deleteTask(this.index);
-        System.out.println("OK Doc, I've removed this task:");
-        System.out.println(" " + t);
-        System.out.println("Now you have " + tasks.getNumberOfTasks() + " tasks in the list.");
+
+        String output = String.format(
+                "OK Doc, I've removed this task:\n"
+                        + " %s\n"
+                        + "Now you have %d tasks in the list.",
+                t,
+                tasks.getNumberOfTasks()
+        );
 
         try {
             storage.save(tasks);
         } catch (IOException e) {
-            ui.showSavingError();
+            output += ui.showSavingError();
         }
+
+        return output;
     }
 }
