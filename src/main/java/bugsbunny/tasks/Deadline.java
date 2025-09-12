@@ -15,8 +15,7 @@ public class Deadline extends Task {
      * @param by Due date-time (inclusive).
      */
     public Deadline(String description, LocalDateTime by) {
-        super(description);
-        this.by = by;
+        this(description, false, by);
     }
 
     /**
@@ -28,6 +27,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, boolean isDone, LocalDateTime by) {
         super(description, isDone);
+        assert by != null : "End date cannot be null";
         this.by = by;
     }
 

@@ -34,9 +34,7 @@ public class Parser {
      * @throws BugsBunnyException If the input is malformed or uses unknown commands.
      */
     public static Command parse(String input) throws BugsBunnyException {
-        if (input == null) {
-            return new ExitCommand(); // null input shouldn't happen
-        }
+        assert input != null : "Input should not be null";
 
         if (input.isEmpty()) {
             throw new BugsBunnyException("Your input cannot be empty");
