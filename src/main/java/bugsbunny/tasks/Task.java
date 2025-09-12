@@ -19,7 +19,7 @@ public abstract class Task {
      * @param description Description of task.
      */
     public Task(String description) {
-        this.description = description;
+        this(description, false);
     }
 
     /**
@@ -29,6 +29,8 @@ public abstract class Task {
      * @param isDone Status completion.
      */
     public Task(String description, boolean isDone) {
+        assert description != null && !description.isBlank()
+                : "Task description must not be null or blank";
         this.description = description;
         this.isDone = isDone;
     }
@@ -60,6 +62,8 @@ public abstract class Task {
      * @throws BugsBunnyException If the line is malformed or has an unknown type.
      */
     public static Task convertFromStorageFormat(String fileTask) throws BugsBunnyException {
+        assert fileTask != null : "File task string should not be null";
+
         String[] parts = fileTask.split(" \\| "); // split on ' | '
 
         if (parts.length < 3) {

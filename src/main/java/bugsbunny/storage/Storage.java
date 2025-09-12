@@ -76,6 +76,7 @@ public class Storage {
      * @throws IOException If writing fails.
      */
     public void save(TaskList taskList) throws IOException {
+        assert taskList != null : "TaskList to save should not be null";
         FileWriter fw = new FileWriter(this.filePathString);
         ArrayList<Task> list = taskList.getList();
 
