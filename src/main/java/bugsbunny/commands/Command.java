@@ -10,6 +10,16 @@ import bugsbunny.tasks.TaskList;
  * Subclasses implement {@link #execute} and may override {@link #isExit}.
  */
 public abstract class Command {
+    protected String args;
+
+    /**
+     * Creates an object of Command type.
+     *
+     * @param args The args which are the user's inputs.
+     */
+    public Command(String args) {
+        this.args = args;
+    }
     /**
      * Executes this command against the given task list and storage.
      *

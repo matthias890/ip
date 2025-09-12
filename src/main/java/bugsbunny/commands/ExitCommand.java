@@ -10,6 +10,10 @@ import bugsbunny.tasks.TaskList;
  */
 public class ExitCommand extends Command {
 
+    public ExitCommand(String args) {
+        super(args);
+    }
+
     /**
      * {@inheritDoc}
      */

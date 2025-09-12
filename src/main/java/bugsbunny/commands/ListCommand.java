@@ -12,6 +12,10 @@ import bugsbunny.tasks.TaskList;
  */
 public class ListCommand extends Command {
 
+    public ListCommand(String args) {
+        super(args);
+    }
+
     /**
      * {@inheritDoc}
      */

@@ -10,6 +10,10 @@ import bugsbunny.tasks.TaskList;
  */
 public class HelpCommand extends Command {
 
+    public HelpCommand(String args) {
+        super(args);
+    }
+
     /**
      * {@inheritDoc}
      */
