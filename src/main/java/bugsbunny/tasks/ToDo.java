@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
  */
 public class ToDo extends Task {
     /**
+     * Returns an instance of ToDo class.
+     *
      * @param description Task name.
      */
     public ToDo(String description) {
@@ -14,6 +16,7 @@ public class ToDo extends Task {
     }
 
     /**
+     * Returns an instance of ToDo class.
      * Used only by {@link #convertFromStorageFormat(String)}.
      *
      * @param description Task name.

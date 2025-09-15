@@ -14,7 +14,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Used when creating a new task.
+     * Returns an instance of Task class.
      *
      * @param description Description of task.
      */
@@ -23,6 +23,7 @@ public abstract class Task {
     }
 
     /**
+     * Returns an instance of Task class.
      * Used only by {@link #convertFromStorageFormat(String)}.
      *
      * @param description Description of task.

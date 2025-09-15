@@ -14,6 +14,7 @@ import bugsbunny.tasks.TaskList;
  * Gets the list of tasks that are due by a specified date and time.
  */
 public class DueCommand extends Command {
+    private static final String DUE_USAGE = "Usage: due <yyyy-mm-dd hhmm>";
 
     public DueCommand(String args) {
         super(args);
@@ -24,23 +25,12 @@ public class DueCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
-        if (super.args.isBlank()) {
-            throw new BugsBunnyException("Usage: due <yyyy-mm-dd hhmm>");
-        }
-        LocalDateTime dueDate;
-        try {
-            dueDate = DateTimeParser.parseStringToDateTime(
-                    super.args.trim(),
-                    DateTimeParser.INPUT_TO_DATE_TIME);
-        } catch (IllegalArgumentException e) {
-            // Incorrect Date format error
-            throw new BugsBunnyException(e.getMessage());
-        }
+        super.ensureValidArgs(super.args, DueCommand.DUE_USAGE);
+        LocalDateTime dueDate =
+                DateTimeParser.parseStringToDateTime(super.args.trim(), DateTimeParser.INPUT_TO_DATE_TIME);
 
         ArrayList<Task> dueTasks = tasks.getTasksDueBy(dueDate);
-
         String output;
-
         if (dueTasks.isEmpty()) {
             output = "You have no tasks that are due by "
                     + dueDate.format(DateTimeParser.DATE_TIME_STRING_FORMATTER);
@@ -51,7 +41,6 @@ public class DueCommand extends Command {
                 output += String.format("\n %d. %s", i + 1, dueTasks.get(i));
             }
         }
-
         return output;
     }
 }

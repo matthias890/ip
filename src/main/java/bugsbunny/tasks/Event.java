@@ -12,6 +12,8 @@ public class Event extends Task {
     private LocalDateTime to;
 
     /**
+     * Returns an instance of Event class.
+     *
      * @param description Task name.
      * @param from Start date-time.
      * @param to End date-time.
@@ -21,6 +23,7 @@ public class Event extends Task {
     }
 
     /**
+     * Returns an instance of Event class.
      * Used only by {@link #convertFromStorageFormat(String)}.
      *
      * @param description Task name.

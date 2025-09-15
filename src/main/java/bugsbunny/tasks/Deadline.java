@@ -11,6 +11,8 @@ public class Deadline extends Task {
     private LocalDateTime by;
 
     /**
+     * Returns an instance of Deadline class.
+     *
      * @param description Task name.
      * @param by Due date-time (inclusive).
      */
@@ -19,6 +21,7 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns an instance of Deadline class.
      * Used only by {@link #convertFromStorageFormat(String)}.
      *
      * @param description Task name.

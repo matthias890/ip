@@ -1,7 +1,5 @@
 package bugsbunny.commands;
 
-import java.io.IOException;
-
 import bugsbunny.app.Ui;
 import bugsbunny.exception.BugsBunnyException;
 import bugsbunny.parsers.Parser;
@@ -12,6 +10,7 @@ import bugsbunny.tasks.TaskList;
  * Marks a task as done and saves the updated state.
  */
 public class MarkCommand extends Command {
+    private static final String MARK_USAGE = "Usage: mark <task index>";
 
     public MarkCommand(String args) {
         super(args);
@@ -22,23 +21,14 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
-        if (super.args.isBlank()) {
-            throw new BugsBunnyException("Usage: mark <task index>");
-        }
-
+        super.ensureValidArgs(super.args, MarkCommand.MARK_USAGE);
         int index = Parser.parseInteger(super.args) - 1;
         if (index < 0 || index >= tasks.getNumberOfTasks()) {
             throw new BugsBunnyException("The task number is out of range");
         }
 
-        tasks.markTask(index);
-        String output = "OK Doc, I've marked this task as done:\n " + tasks.getTask(index);
-
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            output += ui.showSavingError();
-        }
+        String output = tasks.markTask(index);
+        output += super.saveOrAppendError(tasks, ui, storage);
         return output;
     }
 }

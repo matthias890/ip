@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import bugsbunny.exception.BugsBunnyException;
+
 /**
  * Helpers for parsing/formatting date-time strings used by the chatbot.
  */
@@ -30,13 +32,13 @@ public class DateTimeParser {
      * @return Parsed date-time.
      * @throws IllegalArgumentException If the input does not match the formatter.
      */
-    public static LocalDateTime parseStringToDateTime(String s, DateTimeFormatter formatter) {
+    public static LocalDateTime parseStringToDateTime(String s, DateTimeFormatter formatter) throws BugsBunnyException {
         s = s.trim();
 
         try {
             return LocalDateTime.parse(s, formatter);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Unrecognized date time format: " + s
+            throw new BugsBunnyException("Unrecognized date time format: " + s
                     + "\nAccepted date time example: 2025-08-30 1300");
         }
     }

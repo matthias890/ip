@@ -1,18 +1,16 @@
 package bugsbunny.commands;
 
-import java.io.IOException;
-
 import bugsbunny.app.Ui;
 import bugsbunny.exception.BugsBunnyException;
 import bugsbunny.parsers.Parser;
 import bugsbunny.storage.Storage;
-import bugsbunny.tasks.Task;
 import bugsbunny.tasks.TaskList;
 
 /**
  * Deletes a task from the list and saves the updated state.
  */
 public class DeleteCommand extends Command {
+    private static final String DELETE_USAGE = "Usage: delete <task index>";
 
     public DeleteCommand(String args) {
         super(args);
@@ -23,32 +21,13 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
-        if (super.args.isBlank()) {
-            throw new BugsBunnyException("Usage: delete <task index>");
-        }
-
+        super.ensureValidArgs(super.args, DeleteCommand.DELETE_USAGE);
         int index = Parser.parseInteger(super.args) - 1;
         if (index < 0 || index >= tasks.getNumberOfTasks()) {
             throw new BugsBunnyException("The task number is out of range");
         }
-
-        Task t = tasks.getTask(index);
-        tasks.deleteTask(index);
-
-        String output = String.format(
-                "OK Doc, I've removed this task:\n"
-                        + " %s\n"
-                        + "Now you have %d tasks in the list.",
-                t,
-                tasks.getNumberOfTasks()
-        );
-
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            output += ui.showSavingError();
-        }
-
+        String output = tasks.deleteTask(index);
+        output += super.saveOrAppendError(tasks, ui, storage);
         return output;
     }
 }

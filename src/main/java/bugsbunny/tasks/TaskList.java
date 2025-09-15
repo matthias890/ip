@@ -19,30 +19,57 @@ public class TaskList {
 
     /**
      * Adds a task to the end of the list.
+     *
+     * @param task Task to be added.
+     * @return String to inform the user that the task has been added successfully.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.list.add(task);
+        return String.format(
+                "OK Doc, I've added this task:\n"
+                        + " %s\n"
+                        + "Now you have %d tasks in the list.",
+                task,
+                this.list.size()
+        );
     }
 
     /**
      * Removes the task at the given index (0-based).
+     *
+     * @param index Index of task to be removed.
+     * @return String to inform the user that the task has been removed successfully.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
+        Task t = this.list.get(index);
         this.list.remove(index);
+        return String.format(
+                "OK Doc, I've removed this task:\n"
+                        + " %s\n"
+                        + "Now you have %d tasks in the list.",
+                t,
+                this.list.size());
     }
 
     /**
      * Marks the task at the given index (0-based).
+     *
+     * @param index Index of task to be removed.
+     * @return String to inform the user that the task has been marked successfully.
      */
-    public void markTask(int index) {
+    public String markTask(int index) {
         this.list.get(index).updateStatus(true);
+        return "OK Doc, I've marked this task as done:\n " + this.list.get(index);
     }
 
     /**
      * Unmarks the task at the given index (0-based).
+     * @param index Index of task to be removed.
+     * @return String to inform the user that the task has been unmarked successfully.
      */
-    public void unmarkTask(int index) {
+    public String unmarkTask(int index) {
         this.list.get(index).updateStatus(false);
+        return "OK Doc, I've marked this task as not done:\n " + this.list.get(index);
     }
 
     /**
@@ -98,5 +125,21 @@ public class TaskList {
             }
         }
         return matchingTasks;
+    }
+
+    /**
+     * Outputs a string to inform the user that the task has been added successfully.
+     *
+     * @param task Task that has been added.
+     * @return
+     */
+    public String addTaskMessage(Task task) {
+        return String.format(
+                "OK Doc, I've added this task:\n"
+                        + " %s\n"
+                        + "Now you have %d tasks in the list.",
+                task,
+                this.list.size()
+        );
     }
 }

@@ -1,6 +1,5 @@
 package bugsbunny.commands;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 import bugsbunny.app.Ui;
@@ -16,6 +15,7 @@ import bugsbunny.tasks.TaskList;
  */
 public class AddDeadlineCommand extends Command {
     private static final String DEADLINE_SEPARATOR = "/by";
+    private static final String DEADLINE_USAGE = "Usage: deadline <description> /by <date>";
 
     public AddDeadlineCommand(String args) {
         super(args);
@@ -26,48 +26,40 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
-        if (super.args.isBlank() || !super.args.contains(AddDeadlineCommand.DEADLINE_SEPARATOR)) {
-            throw new BugsBunnyException("Usage: deadline <description> /by <date>");
-        }
-        String[] bySplit = super.args.trim().split(AddDeadlineCommand.DEADLINE_SEPARATOR, 2);
+        ensureValidArgs(super.args, AddDeadlineCommand.DEADLINE_USAGE);
+        String[] bySplit = parseDeadlineArgs(super.args);
         String taskName = bySplit[0].trim();
-        if (bySplit.length < 2 || taskName.isEmpty()) {
-            throw new BugsBunnyException("Usage: deadline <description> /by <date>");
-        }
-
         String by = bySplit[1].trim();
+        LocalDateTime byDateTime = DateTimeParser.parseStringToDateTime(by, DateTimeParser.INPUT_TO_DATE_TIME);
 
-        // nothing after /by
-        if (by.isEmpty()) {
-            throw new BugsBunnyException("Usage: deadline <description> /by <date>");
-        }
-
-        LocalDateTime byDateTime;
-        try {
-            byDateTime = DateTimeParser.parseStringToDateTime(
-                    by,
-                    DateTimeParser.INPUT_TO_DATE_TIME);
-        } catch (IllegalArgumentException e) {
-            // Invalid Date time format
-            throw new BugsBunnyException(e.getMessage());
-        }
         Task t = new Deadline(taskName, byDateTime);
-        tasks.addTask(t);
-        String output = String.format(
-                "OK Doc, I've added this task:\n"
-                        + " %s\n"
-                        + "Now you have %d tasks in the list.",
-                t,
-                tasks.getNumberOfTasks()
-
-        );
-
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            output += ui.showSavingError();
-        }
-
+        String output = tasks.addTask(t);
+        output += super.saveOrAppendError(tasks, ui, storage);
         return output;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void ensureValidArgs(String args, String usageError) throws BugsBunnyException {
+        if (args == null || args.isBlank() || !args.contains(AddDeadlineCommand.DEADLINE_SEPARATOR)) {
+            throw new BugsBunnyException(usageError);
+        }
+    }
+
+    /**
+     * Parse the input string to a String array { Task description, Date }.
+     *
+     * @param args Input string by the user.
+     * @return String array { Task description, Date }.
+     * @throws BugsBunnyException If args is invalid.
+     */
+    private String[] parseDeadlineArgs(String args) throws BugsBunnyException {
+        String[] bySplit = args.trim().split(AddDeadlineCommand.DEADLINE_SEPARATOR, 2);
+        if (bySplit.length < 2 || bySplit[0].isBlank() || bySplit[1].isBlank()) {
+            throw new BugsBunnyException(AddDeadlineCommand.DEADLINE_USAGE);
+        }
+        return bySplit;
     }
 }

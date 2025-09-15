@@ -15,6 +15,7 @@ import bugsbunny.tasks.TaskList;
  * i.e. Query for "eat chicken" for the task "todo eat chicken for dinner" works, but the query "eat dinner" will fail.
  */
 public class FindCommand extends Command {
+    private static final String FIND_USAGE = "Usage: find <keyword>";
 
     public FindCommand(String args) {
         super(args);
@@ -25,16 +26,11 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BugsBunnyException {
+        super.ensureValidArgs(super.args, FindCommand.FIND_USAGE);
         String keyword = super.args;
 
-        if (keyword.isBlank()) {
-            throw new BugsBunnyException("Usage: find <keyword>");
-        }
-
         ArrayList<Task> matchingTasks = tasks.getMatchingTasks(keyword);
-
         String output;
-
         if (matchingTasks.isEmpty()) {
             output = "I couldn't find any tasks that have that keyword in their name/description Doc";
         } else {
@@ -44,7 +40,6 @@ public class FindCommand extends Command {
                 output += String.format("\n %d. %s", i + 1, matchingTasks.get(i));
             }
         }
-
         return output;
     }
 }
