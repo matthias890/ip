@@ -50,18 +50,18 @@ public class Ui {
      */
     public String showCommandGuide() {
         return "You can chat with me using the following commands:\n"
-                + " help: Show this guide. Syntax: help\n"
-                + " list: List all the tasks you have created so far. Syntax: list\n"
-                + " mark: Mark a task as completed. Syntax: mark <task index>\n"
-                + " unmark: Mark a task as not completed. Syntax: unmark <task index>\n"
-                + " delete: Delete a task. Syntax: delete <task index>\n"
-                + " todo: Create a todo task. Syntax: todo <task name>\n"
-                + " deadline: Create a deadline task. Syntax: deadline <task name> /by <yyyy-mm-dd hhmm>\n"
-                + " event: Create an event task. "
+                + "1. help: Show this guide. Syntax: help\n"
+                + "2. list: List all the tasks you have created so far. Syntax: list\n"
+                + "3. mark: Mark a task as completed. Syntax: mark <task index>\n"
+                + "4. unmark: Mark a task as not completed. Syntax: unmark <task index>\n"
+                + "5. delete: Delete a task. Syntax: delete <task index>\n"
+                + "6. todo: Create a todo task. Syntax: todo <task name>\n"
+                + "7. deadline: Create a deadline task. Syntax: deadline <task name> /by <yyyy-mm-dd hhmm>\n"
+                + "8. event: Create an event task. "
                 + "Syntax: event <task name> /from <yyyy-mm-dd hhmm> /to <yyyy-mm-dd hhmm>\n"
-                + " due: Shows the tasks that are due by this date and time. Syntax: due <yyyy-mm-dd hhmm>\n"
-                + " find: Shows the tasks that have the keyword in their name/description. Syntax: find <keyword>\n"
-                + " bye: Exit the chat";
+                + "9. due: Shows the tasks that are due by this date and time. Syntax: due <yyyy-mm-dd hhmm>\n"
+                + "10. find: Shows the tasks that have the keyword in their name/description. Syntax: find <keyword>\n"
+                + "11. bye: Exit the chat";
     }
 
     /**
