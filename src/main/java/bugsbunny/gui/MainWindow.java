@@ -55,9 +55,17 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = bugsbunny.getResponse(input);
+
+        // Used ChatGPT to deal with error messages, to create an error box with a red background
+        // so that the user can easily differentiate between normal bot replies and error messages.
+        // Heuristic: detect your Ui.showError(...) and disk I/O error strings
+        boolean isError = response.startsWith("Neeah, there's a problem Doc:")
+                || response.startsWith("Neeah, I can't");
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getBugsBunnyDialog(response, bugsbunnyImage)
+                isError
+                        ? DialogBox.getErrorDialog(response, bugsbunnyImage)
+                        : DialogBox.getBugsBunnyDialog(response, bugsbunnyImage)
         );
         userInput.clear();
     }
