@@ -2,11 +2,22 @@
 
 **BugsBunny** is a task management chatbot that you can interact
 with using simple text commands.
-Here are the supported features:
 
 ---
 
-## Task Management
+## Setup
+1. Download bugsbunny.jar [here](https://github.com/matthias890/ip/releases/tag/A-Release).
+2. Open your local terminal and navigate to the folder where bugsbunny.jar is located at, then run the following command:
+```
+java -jar bugsbunny.jar
+```
+3. That's it! Have fun chatting with BugsBunny!
+
+---
+
+## Features
+
+### Task Management
 
 | **Command**                                                         | **Example**                                                     | **Description**                        |
 |---------------------------------------------------------------------|-----------------------------------------------------------------|----------------------------------------|
@@ -16,7 +27,7 @@ Here are the supported features:
 
 ---
 
-## Marking Tasks
+### Marking Tasks
 
 | **Command**           | **Example** | **Description**          |
 |-----------------------|-------------|--------------------------|
@@ -25,7 +36,7 @@ Here are the supported features:
 
 ---
 
-## Deleting Tasks
+### Deleting Tasks
 
 | **Command**           | **Example** | **Description**              |
 |-----------------------|-------------|------------------------------|
@@ -33,7 +44,7 @@ Here are the supported features:
 
 ---
 
-## Searching & Filtering
+### Searching & Filtering
 
 | **Command**             | **Example**           | **Description**                          |
 |-------------------------|-----------------------|------------------------------------------|
@@ -43,7 +54,7 @@ Here are the supported features:
 
 ---
 
-## Help & Exit
+### Help & Exit
 
 | **Command** | **Example** | **Description**   |
 |-------------|-------------|-------------------|
